@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\CategoryPosts;
 use App\Http\Livewire\ShowPosts;
 use Illuminate\Support\Facades\Route;
 
@@ -20,9 +21,7 @@ Route::get('{slug}', function ($slug) {
     return view('welcome');
 })->name('post-detail');
 
-Route::get('categories/{category}', function ($category) {
-    return view('welcome');
-})->name('category');
+Route::get('categories/{category}', CategoryPosts::class)->name('category');
 
 Route::group(['prefix' => 'dashboard', 'middleware' => 'auth:sanctum'], function () {
 	Route::get('/', function () {
