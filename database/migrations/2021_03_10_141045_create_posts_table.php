@@ -21,7 +21,7 @@ class CreatePostsTable extends Migration
             $table->string('title');
             $table->string('slug');
             $table->boolean('is_published')->default(false);
-            $table->string('featured_image');
+            $table->string('featured_image')->nullable();
             $table->dateTime('published_date');
             $table->foreignId('user_id')->constrained();
             $table->timestamps();

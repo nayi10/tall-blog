@@ -1,6 +1,6 @@
 <article class="flex flex-col mb-2 rounded-md shadow-md md:mb-0">
     <a href="{{ route('post-detail', ['slug' => $post->slug]) }}">
-        <img src="{{ asset("storage/posts/$post->featured_image") }}" alt="{{ $post->title }}" class="w-full h-56 rounded-t-md">
+        <img src="{{ asset($post->featured_image) }}" alt="{{ $post->title }}" class="w-full h-56 rounded-t-md">
     </a>
     <div class="p-3">
         <h3 class="text-lg font-semibold text-gray-900">

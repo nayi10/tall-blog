@@ -22,10 +22,10 @@ class PostFactory extends Factory
      */
     public function definition()
     {
-        $title = $this->faker->sentence(15);
+        $title = $this->faker->sentence(8);
         return [
             'category' => $this->faker->word(),
-            'body' => $this->faker->paragraphs(15, true),
+            'body' => "<p class='my-2'>".implode("</p><p class='my-2'>", $this->faker->paragraphs(15))."</p>",
             'title' => $title,
             'excerpt' => $this->faker->sentences(3, true),
             'featured_image' => "post.png",

@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Livewire\CategoryPosts;
+use App\Http\Livewire\Dashboard\FeaturedImageUpload;
+use App\Http\Livewire\Dashboard\NewPost;
+use App\Http\Livewire\Detail;
 use App\Http\Livewire\ShowPosts;
 use Illuminate\Support\Facades\Route;
 
@@ -17,22 +20,20 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', ShowPosts::class)->name('home');
 
-Route::get('{slug}', function ($slug) {
-    return view('welcome');
-})->name('post-detail');
-
 Route::get('categories/{category}', CategoryPosts::class)->name('category');
 
 Route::group(['prefix' => 'dashboard', 'middleware' => 'auth:sanctum'], function () {
-	Route::get('/', function () {
-    	return view('dashboard');
+    Route::get('/', function () {
+        return view('dashboard');
     })->name('dashboard');
 
-    Route::get('post/add', function () {
-    	return view('dashboard');
-    });
+    Route::get('post/add', NewPost::class)->name('new-post');
 
-    Route::get('category/add', function () {
-    	return view('dashboard');
-    });
+    Route::get('post/upload/{id}', FeaturedImageUpload::class)->name('upload-featured-image');
+
+    Route::get('post/edit/{id}', function ($id) {
+        return view('dashboard');
+    })->name('edit-post');
 });
+
+Route::get('{slug}', Detail::class)->name('post-detail');
