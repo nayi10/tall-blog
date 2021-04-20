@@ -1,5 +1,12 @@
 <div class="p-4 mx-auto mt-3 bg-gray-100 md:p-8 md:w-4/5 md:mt-0">
-    <h1 class="mb-3 text-xl font-semibold text-gray-600">New post</h1>
+    <h1 class="mb-3 text-xl font-semibold text-gray-600">
+        {{ isset($isEdit) ? "Edit post": "New post" }}
+    </h1>
+    @if (session()->has('message'))
+        <div class="flex flex-row justify-between p-2 mb-4 text-green-900 bg-green-600 bg-opacity-25 rounded-md">
+            {{ session('message') }}
+        </div>
+    @endif
     <form wire:submit.prevent="save">
         <div class="overflow-hidden bg-white rounded-md shadow">
             <div class="px-4 py-3 space-y-8 sm:p-6">
@@ -31,7 +38,7 @@
                     </div>
                     <div class="col-span-6 mt-4 sm:col-span-1">
                         <x-jet-label class="text-sm font-medium text-gray-700">
-                            <x-jet-input wire:model="post.is_published" type="checkbox" p class="form-checkbox" />
+                            <x-jet-input wire:model="post.is_published" type="checkbox" class="form-checkbox" />
                             {{ __("Publish") }}
                         </x-jet-label>
                         <x-jet-input-error for="post.is_published" />
@@ -47,7 +54,7 @@
             </div>
             <div class="px-4 py-3 text-right bg-gray-50 sm:px-6">
                 <x-jet-button class="inline-flex justify-center">
-                    {{ __("Next") }}
+                    {{ __(isset($isEdit) && $isEdit ? "Submit": "Next") }}
                 </x-jet-button>
             </div>
         </div>
